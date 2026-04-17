@@ -113,11 +113,15 @@ const GymPreview = ({ image }: { image: string }) => (
     <div>
       <h4 className="font-display text-lg font-bold mb-3">Top Trainers</h4>
       <div className="grid grid-cols-3 gap-3">
-        {["Strength", "HIIT", "Yoga"].map((t, i) => (
-          <div key={t} className="glass rounded-xl overflow-hidden">
-            <div className={`h-20 bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-violet to-primary" : "from-cyan to-violet"}`} />
+        {[
+          { t: "Strength", img: gymHiit },
+          { t: "HIIT", img: gymTrainer },
+          { t: "Yoga", img: gymYoga },
+        ].map((c) => (
+          <div key={c.t} className="glass rounded-xl overflow-hidden">
+            <img src={c.img} alt={`${c.t} coach`} loading="lazy" className="h-20 w-full object-cover" />
             <div className="p-3">
-              <div className="font-semibold text-sm">Coach {t}</div>
+              <div className="font-semibold text-sm">Coach {c.t}</div>
               <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
                 <Star size={10} className="fill-current text-yellow-500" /> 4.9
               </div>
