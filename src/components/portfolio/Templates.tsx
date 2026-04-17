@@ -4,6 +4,20 @@ import gymImg from "@/assets/template-gym.jpg";
 import estateImg from "@/assets/template-estate.jpg";
 import restaurantImg from "@/assets/template-restaurant.jpg";
 import hostelImg from "@/assets/template-hostel.jpg";
+import gymTrainer from "@/assets/gym-trainer.jpg";
+import gymYoga from "@/assets/gym-yoga.jpg";
+import gymHiit from "@/assets/gym-hiit.jpg";
+import estate1 from "@/assets/estate-1.jpg";
+import estate2 from "@/assets/estate-2.jpg";
+import estate3 from "@/assets/estate-3.jpg";
+import estate4 from "@/assets/estate-4.jpg";
+import foodRisotto from "@/assets/food-risotto.jpg";
+import foodSteak from "@/assets/food-steak.jpg";
+import foodSalmon from "@/assets/food-salmon.jpg";
+import foodCake from "@/assets/food-cake.jpg";
+import roomDorm from "@/assets/room-dorm.jpg";
+import roomTwin from "@/assets/room-twin.jpg";
+import roomSuite from "@/assets/room-suite.jpg";
 
 type Template = {
   id: "gym" | "estate" | "restaurant" | "hostel";
