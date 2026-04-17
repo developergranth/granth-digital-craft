@@ -208,13 +208,13 @@ const RestaurantPreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Chef's Specials</h4>
       <div className="grid sm:grid-cols-2 gap-3">
         {[
-          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan", p: "$28" },
-          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection", p: "$62" },
-          { n: "Seared Salmon", d: "Lemon butter, asparagus", p: "$34" },
-          { n: "Lava Cake", d: "Dark chocolate, vanilla ice cream", p: "$14" },
+          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan", p: "$28", img: foodRisotto },
+          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection", p: "$62", img: foodSteak },
+          { n: "Seared Salmon", d: "Lemon butter, asparagus", p: "$34", img: foodSalmon },
+          { n: "Lava Cake", d: "Dark chocolate, vanilla ice cream", p: "$14", img: foodCake },
         ].map((m) => (
-          <div key={m.n} className="glass rounded-xl p-4 flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan to-violet shrink-0" />
+          <div key={m.n} className="glass rounded-xl p-3 flex items-center gap-3">
+            <img src={m.img} alt={m.n} loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline justify-between gap-2">
                 <div className="font-semibold text-sm truncate">{m.n}</div>
