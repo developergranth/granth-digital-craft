@@ -269,12 +269,12 @@ const HostelPreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Available Rooms</h4>
       <div className="space-y-3">
         {[
-          { n: "Cozy Dorm Bed", g: "1 Guest", p: "$18", tag: "Best Value" },
-          { n: "Private Twin Room", g: "2 Guests", p: "$45", tag: "Popular" },
-          { n: "Deluxe Suite", g: "4 Guests", p: "$120", tag: "Premium" },
-        ].map((r, i) => (
+          { n: "Cozy Dorm Bed", g: "1 Guest", p: "$18", tag: "Best Value", img: roomDorm },
+          { n: "Private Twin Room", g: "2 Guests", p: "$45", tag: "Popular", img: roomTwin },
+          { n: "Deluxe Suite", g: "4 Guests", p: "$120", tag: "Premium", img: roomSuite },
+        ].map((r) => (
           <div key={r.n} className="glass rounded-xl p-3 flex items-center gap-3 card-glow">
-            <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-cyan to-violet" : "from-violet to-primary"} shrink-0`} />
+            <img src={r.img} alt={r.n} loading="lazy" className="w-20 h-20 rounded-lg object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <div className="font-semibold text-sm">{r.n}</div>
