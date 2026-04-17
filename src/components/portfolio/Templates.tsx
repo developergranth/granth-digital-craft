@@ -4,6 +4,20 @@ import gymImg from "@/assets/template-gym.jpg";
 import estateImg from "@/assets/template-estate.jpg";
 import restaurantImg from "@/assets/template-restaurant.jpg";
 import hostelImg from "@/assets/template-hostel.jpg";
+import gymTrainer from "@/assets/gym-trainer.jpg";
+import gymYoga from "@/assets/gym-yoga.jpg";
+import gymHiit from "@/assets/gym-hiit.jpg";
+import estate1 from "@/assets/estate-1.jpg";
+import estate2 from "@/assets/estate-2.jpg";
+import estate3 from "@/assets/estate-3.jpg";
+import estate4 from "@/assets/estate-4.jpg";
+import foodRisotto from "@/assets/food-risotto.jpg";
+import foodSteak from "@/assets/food-steak.jpg";
+import foodSalmon from "@/assets/food-salmon.jpg";
+import foodCake from "@/assets/food-cake.jpg";
+import roomDorm from "@/assets/room-dorm.jpg";
+import roomTwin from "@/assets/room-twin.jpg";
+import roomSuite from "@/assets/room-suite.jpg";
 
 type Template = {
   id: "gym" | "estate" | "restaurant" | "hostel";
@@ -99,11 +113,15 @@ const GymPreview = ({ image }: { image: string }) => (
     <div>
       <h4 className="font-display text-lg font-bold mb-3">Top Trainers</h4>
       <div className="grid grid-cols-3 gap-3">
-        {["Strength", "HIIT", "Yoga"].map((t, i) => (
-          <div key={t} className="glass rounded-xl overflow-hidden">
-            <div className={`h-20 bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-violet to-primary" : "from-cyan to-violet"}`} />
+        {[
+          { t: "Strength", img: gymHiit },
+          { t: "HIIT", img: gymTrainer },
+          { t: "Yoga", img: gymYoga },
+        ].map((c) => (
+          <div key={c.t} className="glass rounded-xl overflow-hidden">
+            <img src={c.img} alt={`${c.t} coach`} loading="lazy" className="h-20 w-full object-cover" />
             <div className="p-3">
-              <div className="font-semibold text-sm">Coach {t}</div>
+              <div className="font-semibold text-sm">Coach {c.t}</div>
               <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
                 <Star size={10} className="fill-current text-yellow-500" /> 4.9
               </div>
@@ -140,14 +158,18 @@ const EstatePreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Featured Properties</h4>
       <div className="grid sm:grid-cols-2 gap-4">
         {[
-          { p: "$520k", b: "3 Bed · 2 Bath", loc: "Downtown" },
-          { p: "$1.2M", b: "5 Bed · 4 Bath", loc: "Hillside" },
-          { p: "$340k", b: "2 Bed · 1 Bath", loc: "Riverside" },
-          { p: "$890k", b: "4 Bed · 3 Bath", loc: "Suburb" },
+          { p: "$520k", b: "3 Bed · 2 Bath", loc: "Downtown", img: estate1 },
+          { p: "$1.2M", b: "5 Bed · 4 Bath", loc: "Hillside", img: estate4 },
+          { p: "$340k", b: "2 Bed · 1 Bath", loc: "Riverside", img: estate3 },
+          { p: "$890k", b: "4 Bed · 3 Bath", loc: "Suburb", img: estate2 },
         ].map((l, i) => (
           <div key={i} className="glass rounded-xl overflow-hidden card-glow">
-            <div className={`h-28 bg-gradient-to-br ${i % 2 === 0 ? "from-violet to-primary" : "from-primary to-cyan"} relative`}>
-              <Heart size={16} className="absolute top-2 right-2 text-primary-foreground" />
+            <div className="h-28 relative overflow-hidden">
+              <img src={l.img} alt={`Property in ${l.loc}`} loading="lazy" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+              <button className="absolute top-2 right-2 w-7 h-7 rounded-full glass-strong flex items-center justify-center">
+                <Heart size={12} className="text-primary-foreground" />
+              </button>
             </div>
             <div className="p-3">
               <div className="font-display font-bold text-base">{l.p}</div>
@@ -186,13 +208,13 @@ const RestaurantPreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Chef's Specials</h4>
       <div className="grid sm:grid-cols-2 gap-3">
         {[
-          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan", p: "$28" },
-          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection", p: "$62" },
-          { n: "Seared Salmon", d: "Lemon butter, asparagus", p: "$34" },
-          { n: "Lava Cake", d: "Dark chocolate, vanilla ice cream", p: "$14" },
+          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan", p: "$28", img: foodRisotto },
+          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection", p: "$62", img: foodSteak },
+          { n: "Seared Salmon", d: "Lemon butter, asparagus", p: "$34", img: foodSalmon },
+          { n: "Lava Cake", d: "Dark chocolate, vanilla ice cream", p: "$14", img: foodCake },
         ].map((m) => (
-          <div key={m.n} className="glass rounded-xl p-4 flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan to-violet shrink-0" />
+          <div key={m.n} className="glass rounded-xl p-3 flex items-center gap-3">
+            <img src={m.img} alt={m.n} loading="lazy" className="w-14 h-14 rounded-lg object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline justify-between gap-2">
                 <div className="font-semibold text-sm truncate">{m.n}</div>
@@ -247,12 +269,12 @@ const HostelPreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Available Rooms</h4>
       <div className="space-y-3">
         {[
-          { n: "Cozy Dorm Bed", g: "1 Guest", p: "$18", tag: "Best Value" },
-          { n: "Private Twin Room", g: "2 Guests", p: "$45", tag: "Popular" },
-          { n: "Deluxe Suite", g: "4 Guests", p: "$120", tag: "Premium" },
-        ].map((r, i) => (
+          { n: "Cozy Dorm Bed", g: "1 Guest", p: "$18", tag: "Best Value", img: roomDorm },
+          { n: "Private Twin Room", g: "2 Guests", p: "$45", tag: "Popular", img: roomTwin },
+          { n: "Deluxe Suite", g: "4 Guests", p: "$120", tag: "Premium", img: roomSuite },
+        ].map((r) => (
           <div key={r.n} className="glass rounded-xl p-3 flex items-center gap-3 card-glow">
-            <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-cyan to-violet" : "from-violet to-primary"} shrink-0`} />
+            <img src={r.img} alt={r.n} loading="lazy" className="w-20 h-20 rounded-lg object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <div className="font-semibold text-sm">{r.n}</div>
@@ -416,27 +438,8 @@ const Templates = () => {
             </div>
 
             {/* Live preview */}
-            <div className="px-4 md:px-8 py-6">
+            <div className="px-4 md:px-8 py-6 pb-8">
               <PreviewComp image={active.image} />
-            </div>
-
-            {/* CTA */}
-            <div className="px-6 md:px-8 pb-8 pt-2 border-t border-border mt-2">
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
-                <div>
-                  <h4 className="font-display font-bold text-base mb-1">Like this template?</h4>
-                  <p className="text-xs text-muted-foreground">I'll customize it for your brand and business.</p>
-                </div>
-                <a
-                  href={`https://wa.me/919602882318?text=${encodeURIComponent(`Hi Granth, I'm interested in the ${active.name} template.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold glow-primary hover:scale-105 transition-transform"
-                >
-                  Get This Template
-                  <ExternalLink size={14} />
-                </a>
-              </div>
             </div>
           </div>
         </div>

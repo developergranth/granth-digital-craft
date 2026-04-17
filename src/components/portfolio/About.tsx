@@ -28,6 +28,13 @@ const About = () => {
           </p>
         </div>
 
+        {/* Subheading for highlights */}
+        <div className="text-center mb-8 reveal">
+          <h3 className="font-display text-2xl md:text-3xl font-bold">
+            The reason why you should <span className="text-gradient-primary">prefer me</span>
+          </h3>
+        </div>
+
         {/* Highlight cards */}
         <div className="grid sm:grid-cols-3 gap-5 reveal">
           {highlights.map((h) => (
