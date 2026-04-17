@@ -158,14 +158,18 @@ const EstatePreview = ({ image }: { image: string }) => (
       <h4 className="font-display text-lg font-bold mb-3">Featured Properties</h4>
       <div className="grid sm:grid-cols-2 gap-4">
         {[
-          { p: "$520k", b: "3 Bed · 2 Bath", loc: "Downtown" },
-          { p: "$1.2M", b: "5 Bed · 4 Bath", loc: "Hillside" },
-          { p: "$340k", b: "2 Bed · 1 Bath", loc: "Riverside" },
-          { p: "$890k", b: "4 Bed · 3 Bath", loc: "Suburb" },
+          { p: "$520k", b: "3 Bed · 2 Bath", loc: "Downtown", img: estate1 },
+          { p: "$1.2M", b: "5 Bed · 4 Bath", loc: "Hillside", img: estate4 },
+          { p: "$340k", b: "2 Bed · 1 Bath", loc: "Riverside", img: estate3 },
+          { p: "$890k", b: "4 Bed · 3 Bath", loc: "Suburb", img: estate2 },
         ].map((l, i) => (
           <div key={i} className="glass rounded-xl overflow-hidden card-glow">
-            <div className={`h-28 bg-gradient-to-br ${i % 2 === 0 ? "from-violet to-primary" : "from-primary to-cyan"} relative`}>
-              <Heart size={16} className="absolute top-2 right-2 text-primary-foreground" />
+            <div className="h-28 relative overflow-hidden">
+              <img src={l.img} alt={`Property in ${l.loc}`} loading="lazy" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+              <button className="absolute top-2 right-2 w-7 h-7 rounded-full glass-strong flex items-center justify-center">
+                <Heart size={12} className="text-primary-foreground" />
+              </button>
             </div>
             <div className="p-3">
               <div className="font-display font-bold text-base">{l.p}</div>
