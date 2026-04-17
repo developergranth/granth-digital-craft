@@ -153,9 +153,9 @@ const GymPreview = ({ image }: { image: string }) => (
       </div>
       <div className="grid sm:grid-cols-3 gap-3">
         {[
-          { name: "Basic", price: "$29", perks: ["Gym Access", "Locker Room", "1 Group Class/wk"] },
-          { name: "Pro", price: "$59", perks: ["All Basic", "Unlimited Classes", "Sauna & Steam"], highlight: true },
-          { name: "Elite", price: "$99", perks: ["All Pro", "Personal Trainer", "Diet Plan"] },
+          { name: "Basic", price: "₹1,499", perks: ["Gym Access", "Locker Room", "1 Group Class/wk"] },
+          { name: "Pro", price: "₹2,999", perks: ["All Basic", "Unlimited Classes", "Sauna & Steam"], highlight: true },
+          { name: "Elite", price: "₹4,999", perks: ["All Pro", "Personal Trainer", "Diet Plan"] },
         ].map((p) => (
           <div key={p.name} className={`rounded-2xl p-5 border ${p.highlight ? "bg-gradient-primary border-transparent text-primary-foreground scale-[1.02]" : "glass border-border"}`}>
             {p.highlight && <div className="text-[10px] uppercase tracking-widest mb-1 opacity-80">Most Popular</div>}
@@ -231,10 +231,10 @@ const EstatePreview = ({ image }: { image: string }) => (
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         {[
-          { p: "$520k", b: "3 Bed · 2 Bath · 1,800 sqft", loc: "Downtown", img: estate1, tag: "New" },
-          { p: "$1.2M", b: "5 Bed · 4 Bath · 3,200 sqft", loc: "Hillside", img: estate4, tag: "Featured" },
-          { p: "$340k", b: "2 Bed · 1 Bath · 1,100 sqft", loc: "Riverside", img: estate3, tag: "Hot" },
-          { p: "$890k", b: "4 Bed · 3 Bath · 2,500 sqft", loc: "Suburb Heights", img: estate2 },
+          { p: "₹4.4 Cr", b: "3 Bed · 2 Bath · 1,800 sqft", loc: "Downtown", img: estate1, tag: "New" },
+          { p: "₹10.2 Cr", b: "5 Bed · 4 Bath · 3,200 sqft", loc: "Hillside", img: estate4, tag: "Featured" },
+          { p: "₹2.9 Cr", b: "2 Bed · 1 Bath · 1,100 sqft", loc: "Riverside", img: estate3, tag: "Hot" },
+          { p: "₹7.6 Cr", b: "4 Bed · 3 Bath · 2,500 sqft", loc: "Suburb Heights", img: estate2 },
         ].map((l, i) => (
           <article key={i} className="glass rounded-2xl overflow-hidden card-glow group">
             <div className="h-40 relative overflow-hidden">
@@ -318,10 +318,10 @@ const RestaurantPreview = ({ image }: { image: string }) => (
       </div>
       <div className="grid sm:grid-cols-2 gap-3">
         {[
-          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan, fresh herbs", p: "$28", img: foodRisotto, tag: "Vegetarian" },
-          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection, jus", p: "$62", img: foodSteak, tag: "Signature" },
-          { n: "Seared Salmon", d: "Lemon butter, asparagus, capers", p: "$34", img: foodSalmon },
-          { n: "Lava Cake", d: "Dark chocolate, vanilla bean ice cream", p: "$14", img: foodCake, tag: "Dessert" },
+          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan, fresh herbs", p: "₹2,400", img: foodRisotto, tag: "Vegetarian" },
+          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection, jus", p: "₹5,200", img: foodSteak, tag: "Signature" },
+          { n: "Seared Salmon", d: "Lemon butter, asparagus, capers", p: "₹2,900", img: foodSalmon },
+          { n: "Lava Cake", d: "Dark chocolate, vanilla bean ice cream", p: "₹1,200", img: foodCake, tag: "Dessert" },
         ].map((m) => (
           <article key={m.n} className="glass rounded-2xl p-3 flex items-center gap-3 card-glow">
             <img src={m.img} alt={m.n} loading="lazy" className="w-20 h-20 rounded-xl object-cover shrink-0" />
@@ -417,9 +417,9 @@ const HostelPreview = ({ image }: { image: string }) => (
       </div>
       <div className="space-y-3">
         {[
-          { n: "Cozy Dorm Bed", g: "1 Guest · Shared", p: "$18", tag: "Best Value", img: roomDorm, perks: ["Locker","Reading Light","AC"] },
-          { n: "Private Twin Room", g: "2 Guests · Ensuite", p: "$45", tag: "Popular", img: roomTwin, perks: ["Private Bath","Balcony","WiFi"] },
-          { n: "Deluxe Suite", g: "4 Guests · Premium", p: "$120", tag: "Premium", img: roomSuite, perks: ["King Bed","Sea View","Lounge"] },
+          { n: "Cozy Dorm Bed", g: "1 Guest · Shared", p: "₹799", tag: "Best Value", img: roomDorm, perks: ["Locker","Reading Light","AC"] },
+          { n: "Private Twin Room", g: "2 Guests · Ensuite", p: "₹1,999", tag: "Popular", img: roomTwin, perks: ["Private Bath","Balcony","WiFi"] },
+          { n: "Deluxe Suite", g: "4 Guests · Premium", p: "₹4,999", tag: "Premium", img: roomSuite, perks: ["King Bed","Sea View","Lounge"] },
         ].map((r) => (
           <article key={r.n} className="glass rounded-2xl overflow-hidden card-glow flex flex-col sm:flex-row">
             <img src={r.img} alt={r.n} loading="lazy" className="w-full sm:w-40 h-32 sm:h-auto object-cover shrink-0" />

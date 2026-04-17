@@ -19,7 +19,7 @@ const About = () => {
         {/* Bio */}
         <div className="reveal text-center max-w-3xl mx-auto mb-12">
           <h3 className="font-display text-2xl md:text-3xl font-bold mb-5 leading-snug">
-            Hi, I'm <span className="text-gradient-primary">Granth Mittal</span> — a freelance web developer passionate about helping businesses grow online.
+            Hi, I'm <span className="text-gradient-primary">Granth Mittal</span> — a web developer passionate about helping businesses grow online.
           </h3>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             I build fast, modern, and conversion-focused websites and automation systems that
