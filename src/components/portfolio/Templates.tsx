@@ -438,27 +438,8 @@ const Templates = () => {
             </div>
 
             {/* Live preview */}
-            <div className="px-4 md:px-8 py-6">
+            <div className="px-4 md:px-8 py-6 pb-8">
               <PreviewComp image={active.image} />
-            </div>
-
-            {/* CTA */}
-            <div className="px-6 md:px-8 pb-8 pt-2 border-t border-border mt-2">
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
-                <div>
-                  <h4 className="font-display font-bold text-base mb-1">Like this template?</h4>
-                  <p className="text-xs text-muted-foreground">I'll customize it for your brand and business.</p>
-                </div>
-                <a
-                  href={`https://wa.me/919602882318?text=${encodeURIComponent(`Hi Granth, I'm interested in the ${active.name} template.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold glow-primary hover:scale-105 transition-transform"
-                >
-                  Get This Template
-                  <ExternalLink size={14} />
-                </a>
-              </div>
             </div>
           </div>
         </div>
