@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { ExternalLink, Dumbbell, Home, UtensilsCrossed, BedDouble, X } from "lucide-react";
+import { ExternalLink, Dumbbell, Home, UtensilsCrossed, BedDouble, X, Star, MapPin, Clock, Users, Calendar, Search, Heart, ShoppingBag } from "lucide-react";
 import gymImg from "@/assets/template-gym.jpg";
 import estateImg from "@/assets/template-estate.jpg";
 import restaurantImg from "@/assets/template-restaurant.jpg";
 import hostelImg from "@/assets/template-hostel.jpg";
 
 type Template = {
-  id: string;
+  id: "gym" | "estate" | "restaurant" | "hostel";
   name: string;
   category: string;
   tagline: string;
@@ -59,8 +59,244 @@ const templates: Template[] = [
   },
 ];
 
+/* --------- Mock website previews (rendered inside the modal) --------- */
+
+const GymPreview = ({ image }: { image: string }) => (
+  <div className="space-y-6">
+    {/* Hero */}
+    <div className="relative h-64 rounded-2xl overflow-hidden">
+      <img src={image} alt="GymPro hero" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
+      <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10 max-w-lg">
+        <span className="text-xs text-cyan uppercase tracking-widest mb-2">Fitness Reimagined</span>
+        <h3 className="font-display text-2xl md:text-4xl font-bold mb-3">Train Hard. Live Strong.</h3>
+        <p className="text-sm text-muted-foreground mb-4">Premium equipment, expert trainers, results-driven programs.</p>
+        <button className="self-start px-5 py-2 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold">Join Now</button>
+      </div>
+    </div>
+
+    {/* Plans */}
+    <div>
+      <h4 className="font-display text-lg font-bold mb-3">Membership Plans</h4>
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { name: "Basic", price: "$29", perks: ["Gym Access", "Locker"] },
+          { name: "Pro", price: "$59", perks: ["+ Classes", "+ Sauna"], highlight: true },
+          { name: "Elite", price: "$99", perks: ["+ Trainer", "+ Diet"] },
+        ].map((p) => (
+          <div key={p.name} className={`rounded-xl p-4 border ${p.highlight ? "bg-gradient-primary border-transparent text-primary-foreground" : "glass border-border"}`}>
+            <div className="text-xs uppercase opacity-80 mb-1">{p.name}</div>
+            <div className="font-display text-2xl font-bold">{p.price}<span className="text-xs opacity-70">/mo</span></div>
+            <ul className="text-xs mt-2 space-y-1 opacity-90">
+              {p.perks.map((x) => <li key={x}>• {x}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Trainers */}
+    <div>
+      <h4 className="font-display text-lg font-bold mb-3">Top Trainers</h4>
+      <div className="grid grid-cols-3 gap-3">
+        {["Strength", "HIIT", "Yoga"].map((t, i) => (
+          <div key={t} className="glass rounded-xl overflow-hidden">
+            <div className={`h-20 bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-violet to-primary" : "from-cyan to-violet"}`} />
+            <div className="p-3">
+              <div className="font-semibold text-sm">Coach {t}</div>
+              <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                <Star size={10} className="fill-current text-yellow-500" /> 4.9
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const EstatePreview = ({ image }: { image: string }) => (
+  <div className="space-y-6">
+    {/* Hero with search */}
+    <div className="relative h-64 rounded-2xl overflow-hidden">
+      <img src={image} alt="EstateEdge hero" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+      <div className="absolute bottom-6 left-6 right-6">
+        <h3 className="font-display text-2xl md:text-3xl font-bold mb-3">Find Your Dream Home</h3>
+        <div className="glass-strong rounded-full p-1.5 flex items-center gap-2">
+          <Search size={16} className="ml-3 text-muted-foreground" />
+          <input
+            disabled
+            placeholder="City, neighborhood, or ZIP"
+            className="flex-1 bg-transparent text-sm outline-none px-1 placeholder:text-muted-foreground"
+          />
+          <button className="px-4 py-2 rounded-full bg-gradient-primary text-primary-foreground text-xs font-semibold">Search</button>
+        </div>
+      </div>
+    </div>
+
+    {/* Listings */}
+    <div>
+      <h4 className="font-display text-lg font-bold mb-3">Featured Properties</h4>
+      <div className="grid sm:grid-cols-2 gap-4">
+        {[
+          { p: "$520k", b: "3 Bed · 2 Bath", loc: "Downtown" },
+          { p: "$1.2M", b: "5 Bed · 4 Bath", loc: "Hillside" },
+          { p: "$340k", b: "2 Bed · 1 Bath", loc: "Riverside" },
+          { p: "$890k", b: "4 Bed · 3 Bath", loc: "Suburb" },
+        ].map((l, i) => (
+          <div key={i} className="glass rounded-xl overflow-hidden card-glow">
+            <div className={`h-28 bg-gradient-to-br ${i % 2 === 0 ? "from-violet to-primary" : "from-primary to-cyan"} relative`}>
+              <Heart size={16} className="absolute top-2 right-2 text-primary-foreground" />
+            </div>
+            <div className="p-3">
+              <div className="font-display font-bold text-base">{l.p}</div>
+              <div className="text-xs text-muted-foreground">{l.b}</div>
+              <div className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                <MapPin size={10} /> {l.loc}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const RestaurantPreview = ({ image }: { image: string }) => (
+  <div className="space-y-6">
+    {/* Hero */}
+    <div className="relative h-64 rounded-2xl overflow-hidden">
+      <img src={image} alt="TasteHouse hero" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+      <div className="absolute bottom-6 left-6 right-6">
+        <span className="text-xs text-cyan uppercase tracking-widest">Fine Dining</span>
+        <h3 className="font-display text-2xl md:text-4xl font-bold mt-1">Flavors That Tell a Story</h3>
+        <div className="flex gap-2 mt-3">
+          <button className="px-4 py-2 rounded-full bg-gradient-primary text-primary-foreground text-xs font-semibold flex items-center gap-1.5">
+            <Calendar size={12} /> Reserve Table
+          </button>
+          <button className="px-4 py-2 rounded-full glass-strong text-xs font-semibold">View Menu</button>
+        </div>
+      </div>
+    </div>
+
+    {/* Menu */}
+    <div>
+      <h4 className="font-display text-lg font-bold mb-3">Chef's Specials</h4>
+      <div className="grid sm:grid-cols-2 gap-3">
+        {[
+          { n: "Truffle Risotto", d: "Wild mushrooms, parmesan", p: "$28" },
+          { n: "Wagyu Steak", d: "Grass-fed, charred to perfection", p: "$62" },
+          { n: "Seared Salmon", d: "Lemon butter, asparagus", p: "$34" },
+          { n: "Lava Cake", d: "Dark chocolate, vanilla ice cream", p: "$14" },
+        ].map((m) => (
+          <div key={m.n} className="glass rounded-xl p-4 flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan to-violet shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-baseline justify-between gap-2">
+                <div className="font-semibold text-sm truncate">{m.n}</div>
+                <div className="text-sm text-cyan font-bold">{m.p}</div>
+              </div>
+              <div className="text-xs text-muted-foreground truncate">{m.d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Reviews */}
+    <div className="glass rounded-xl p-4 flex items-center gap-3">
+      <div className="flex">
+        {[...Array(5)].map((_, i) => <Star key={i} size={14} className="fill-yellow-500 text-yellow-500" />)}
+      </div>
+      <div className="text-xs text-muted-foreground">
+        <span className="font-semibold text-foreground">4.9</span> · 1,200+ guest reviews
+      </div>
+    </div>
+  </div>
+);
+
+const HostelPreview = ({ image }: { image: string }) => (
+  <div className="space-y-6">
+    {/* Hero */}
+    <div className="relative h-64 rounded-2xl overflow-hidden">
+      <img src={image} alt="StayNest hero" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+      <div className="absolute bottom-6 left-6 right-6">
+        <h3 className="font-display text-2xl md:text-3xl font-bold mb-3">Your Home Away From Home</h3>
+        <div className="glass-strong rounded-2xl p-3 grid grid-cols-3 gap-2 text-xs">
+          <div>
+            <div className="text-muted-foreground mb-0.5">Check-in</div>
+            <div className="font-semibold">Apr 20</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground mb-0.5">Check-out</div>
+            <div className="font-semibold">Apr 24</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground mb-0.5">Guests</div>
+            <div className="font-semibold">2 · 1 Room</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Rooms */}
+    <div>
+      <h4 className="font-display text-lg font-bold mb-3">Available Rooms</h4>
+      <div className="space-y-3">
+        {[
+          { n: "Cozy Dorm Bed", g: "1 Guest", p: "$18", tag: "Best Value" },
+          { n: "Private Twin Room", g: "2 Guests", p: "$45", tag: "Popular" },
+          { n: "Deluxe Suite", g: "4 Guests", p: "$120", tag: "Premium" },
+        ].map((r, i) => (
+          <div key={r.n} className="glass rounded-xl p-3 flex items-center gap-3 card-glow">
+            <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${i === 0 ? "from-primary to-cyan" : i === 1 ? "from-cyan to-violet" : "from-violet to-primary"} shrink-0`} />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <div className="font-semibold text-sm">{r.n}</div>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-surface-elevated text-cyan border border-border">{r.tag}</span>
+              </div>
+              <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                <Users size={10} /> {r.g}
+              </div>
+            </div>
+            <div className="text-right shrink-0">
+              <div className="font-display font-bold text-base">{r.p}</div>
+              <div className="text-[10px] text-muted-foreground">/night</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Trust strip */}
+    <div className="grid grid-cols-3 gap-2 text-center">
+      {[
+        { i: Clock, t: "24/7 Reception" },
+        { i: ShoppingBag, t: "Free Breakfast" },
+        { i: Star, t: "4.8 Rated" },
+      ].map((x) => (
+        <div key={x.t} className="glass rounded-xl p-3">
+          <x.i size={16} className="mx-auto text-cyan mb-1" />
+          <div className="text-xs text-muted-foreground">{x.t}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const previewMap = {
+  gym: GymPreview,
+  estate: EstatePreview,
+  restaurant: RestaurantPreview,
+  hostel: HostelPreview,
+};
+
 const Templates = () => {
   const [active, setActive] = useState<Template | null>(null);
+  const PreviewComp = active ? previewMap[active.id] : null;
 
   return (
     <section id="templates" className="section-padding relative">
@@ -83,18 +319,16 @@ const Templates = () => {
               style={{ transitionDelay: `${i * 100}ms` }}
               onClick={() => setActive(t)}
             >
-              {/* Image preview */}
               <div className="relative h-56 md:h-64 overflow-hidden">
                 <img
                   src={t.image}
-                  alt={`${t.name} ${t.category} template preview`}
+                  alt={`${t.name} ${t.category} website template preview by Granth Mittal`}
                   width={1024}
                   height={640}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                {/* Mock browser bar */}
                 <div className="absolute top-4 left-4 right-4 glass-strong rounded-lg flex items-center gap-1.5 px-3 py-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-destructive/70" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
@@ -103,13 +337,11 @@ const Templates = () => {
                     {t.name.toLowerCase()}.com
                   </span>
                 </div>
-                {/* Category tag */}
                 <span className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${t.accent} text-primary-foreground`}>
                   {t.category}
                 </span>
               </div>
 
-              {/* Content */}
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -142,53 +374,69 @@ const Templates = () => {
         </div>
       </div>
 
-      {/* Modal preview */}
-      {active && (
+      {/* Modal — full website preview */}
+      {active && PreviewComp && (
         <div
-          className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[100] bg-background/90 backdrop-blur-md flex items-start md:items-center justify-center p-3 md:p-6 animate-fade-in overflow-y-auto"
           onClick={() => setActive(null)}
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] glass-strong rounded-3xl overflow-hidden animate-fade-in-up"
+            className="relative w-full max-w-4xl glass-strong rounded-3xl overflow-hidden animate-fade-in-up my-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setActive(null)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:bg-white/10 transition-colors"
-              aria-label="Close"
-            >
-              <X size={18} />
-            </button>
-            <div className="relative h-64 md:h-80 overflow-hidden">
-              <img src={active.image} alt={active.name} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${active.accent} text-primary-foreground mb-3`}>
+            {/* Mock browser bar */}
+            <div className="sticky top-0 z-10 glass-strong border-b border-border flex items-center gap-2 px-4 py-3">
+              <span className="w-3 h-3 rounded-full bg-destructive/70" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500/70" />
+              <div className="flex-1 mx-2 px-3 py-1 rounded-md bg-surface text-xs text-muted-foreground truncate">
+                https://{active.name.toLowerCase()}.com
+              </div>
+              <button
+                onClick={() => setActive(null)}
+                className="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
+                aria-label="Close preview"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Title bar */}
+            <div className="px-6 md:px-8 pt-6 pb-2 flex items-center justify-between gap-4">
+              <div>
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${active.accent} text-primary-foreground mb-2`}>
                   {active.category}
                 </span>
-                <h3 className="font-display text-3xl md:text-4xl font-bold">{active.name}</h3>
-                <p className="text-muted-foreground italic mt-1">{active.tagline}</p>
+                <h3 className="font-display text-2xl md:text-3xl font-bold">{active.name}</h3>
+                <p className="text-sm text-muted-foreground italic">{active.tagline}</p>
+              </div>
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${active.accent} flex items-center justify-center shrink-0`}>
+                <active.Icon className="text-primary-foreground" size={22} />
               </div>
             </div>
-            <div className="p-6 md:p-8 overflow-y-auto">
-              <h4 className="font-display text-lg font-bold mb-4">Key Features</h4>
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                {active.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm">
-                    <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${active.accent}`} />
-                    <span className="text-muted-foreground">{f}</span>
-                  </div>
-                ))}
+
+            {/* Live preview */}
+            <div className="px-4 md:px-8 py-6">
+              <PreviewComp image={active.image} />
+            </div>
+
+            {/* CTA */}
+            <div className="px-6 md:px-8 pb-8 pt-2 border-t border-border mt-2">
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
+                <div>
+                  <h4 className="font-display font-bold text-base mb-1">Like this template?</h4>
+                  <p className="text-xs text-muted-foreground">I'll customize it for your brand and business.</p>
+                </div>
+                <a
+                  href={`https://wa.me/919602882318?text=${encodeURIComponent(`Hi Granth, I'm interested in the ${active.name} template.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold glow-primary hover:scale-105 transition-transform"
+                >
+                  Get This Template
+                  <ExternalLink size={14} />
+                </a>
               </div>
-              <a
-                href="https://wa.me/919602882318"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-primary text-primary-foreground font-semibold glow-primary hover:scale-105 transition-transform"
-              >
-                Get This Template
-                <ExternalLink size={16} />
-              </a>
             </div>
           </div>
         </div>
